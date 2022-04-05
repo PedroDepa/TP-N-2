@@ -1,2 +1,2 @@
 # TP2
-con pedro y maxi
+Pedro y Maxi
