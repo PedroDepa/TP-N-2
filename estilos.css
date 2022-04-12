@@ -13,6 +13,8 @@ h1{
 }
 
 body{
-  background-image: url(https://uhdwallpapers.org/uploads/converted/20/06/25/macos-big-sur-wwdc-1366x768_785884-mm-90.jpg)
+  background-image: url(asets/fondo.jpg)
   }
-
+  body{
+    background-size: 1200px 850px;
+  }
