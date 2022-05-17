@@ -63,28 +63,49 @@ function func_ej6() {
     }
     
 }
+function func_ej7(){
+    let ej7_c1 = parseFloat(document.getElementById("ej7_c1").value);
+    let ej7_c2 = parseFloat(document.getElementById("ej7_c2").value);
 
-function func_ej7() {
-  
-    let ej7_c1 = document.getElementById('ej7_c1').value * 1;
-    let ej7_c2 = document.getElementById('ej7_c2').value * 1;
-    ej7_resultado = ""
-    let mayor, menor;
+    const multiposDeTres = [];
 
-    if (ej7_c1 > ej7_c2) {
-            mayor = ej7_c1;
-            menor = ej7_c2;
-        } else {
-            mayor = ej7_c2;
-            menor = ej7_c1;
+    for (let i=1; i <= ej7_c2 && i <= ej7_c1; i++){
+        if (i % 3 == 0){
+          multiposDeTres.push(i);
         }
-        while (menor <= mayor) {
-            let calculo = menor % 3;
-            if (calculo === 0) {
-                ej7_resultado = ej7_resultado + ' | ' + menor;
-            }
-            menor++;
     }
+    document.getElementById("ej7_resultado").value = multiposDeTres.toString();
+}
+
+function func_ej8(){
+    let ej8_c1 = parseFloat(document.getElementById("ej8_c1").value);
+    
+    function esPrimo(numero){
+        let divisores = 0;
+        for(let i=2; i <= numero; i++) {        
+            if(numero % i === 0) {
+                divisores += 1;                    
+            }
+        }
+        if(divisores===1){
+            console.log(numero + " es primo")
+            return true
+        }else{
+            console.log(numero + " no es primo")
+            return false
+        }
+    }
+
+    let Primo = [];
+
+    for(let i=0; i <= ej8_c1; i++){
+        console.log("i es " + i)
+        if (esPrimo(i)){
+            Primo.push(i);
+        }
+    }
+
+    document.getElementById("ej8_resultado").value = Primo.toString();
 }
 
 function func_ej9() {
@@ -97,20 +118,20 @@ function func_ej9() {
 }
 
 function func_ej10 () {
-  
+
     let ej10_c1= parseFloat(document.getElementById("ej10_c1").value);
     let ej10_c2= parseFloat(document.getElementById("ej10_c2").value);
+
     let ej10_resultado= ""
 
-if (ej10_c1>ej10_c2){
-    for(i=ej10_c2 + 1; i < ej10_c1; i ++){
-        ej10_resultado= ej10_resultado + i + "-"
-    }
-}else{
-    for(i=ej10_c1 + 1; i < ej10_c2; i++){
-        ej10_resultado= ej10_resultado + i + "-"
-    }
-
-}
-document.getElementById("ej10_resultado").value = ej10_resultado;
+    if (ej10_c1>ej10_c2){
+        for(i=ej10_c2 + 1; i < ej10_c1; i ++){
+            ej10_resultado= ej10_resultado + i + "-"
+        }
+    }else{
+        for(i=ej10_c1 + 1; i < ej10_c2; i++){
+            ej10_resultado= ej10_resultado + i + "-"
+        }
+    }   
+    document.getElementById("ej10_resultado").value = ej10_resultado;
 }

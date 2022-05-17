@@ -89,17 +89,6 @@
   <label for="ej5_resultado">Resultado</label>
   <input type="text" id="ej5_resultado">
   
-  <script>
-      function func_ej5() {
-  
-          let ej5_c1 = document.getElementById("ej5_c1").value;
-          
-  
-          let resultado_ej5 = ej5_c1.length;
-            document.getElementById("ej5_resultado").value = resultado_ej5;      
-      }
-  </script>
-  
    <h5> Ejercicio 6</h5>
   <!--Ingresar un número e indicar si es par.-->
   <label for="ej6_c1"> Ingresar numero</label>
@@ -110,58 +99,32 @@
    <label for="ej6_resultado">Respuesta</label>
    <input type="text" id="ej6_resultado">
   
-   <script>
-       function func_ej6() {
-           
-      let ej6_c1 =document.getElementById("ej6_c1").value
-  
-    if (ej6_c1 % 2 == 0) {
-          document.getElementById("ej6_resultado").value = "El número " + ej6_c1 + " es Par";
-      } else {
-          document.getElementById("ej6_resultado").value = "El número " + ej6_c1 + " no es Par";
-      }
-      
-  }
-   </script>
+
     
       <h5>Ejercisio 7</h5>
   <!--Ingresar dos números y mostrar los múltiplos de 3 comprendidos entre ambos.-->
-      <label for="ej7_c1">Numero 1: </label>
-      <input type="number" id="ej7_c1">
-      <br>
-      <label for="ej7_c2">Numero 2: </label>
-      <input type="number" id="ej7_c2">
-       <br>
-       <button onclick="func_ej7()">Comprobar</button>
-       <label for="ej7_resultado">Respuesta</label>
-       <input type="number" id="ej7_resultado">
+  <label for="ej7_c1">Número</label>
+  <input type="number" id="ej7_c1">
+  <br>
   
-      <script>
-          function func_ej7() {
+  <label for="ej7_c2">Número</label>
+  <input type="number" id="ej7_c2">
+  <br>
+  <button onclick="func_ej7()">Resultado</button>
   
-          let ej7_c1 = document.getElementById('ej7_c1').value * 1;
-          let ej7_c2 = document.getElementById('ej7_c2').value * 1;
-          ej7_resultado = ""
-          let mayor, menor;
+  <label for="ej7_resultado">Resultado</label>
+  <input type="text" id="ej7_resultado">
   
-          if (ej7_c1 > ej7_c2) {
-                  mayor = ej7_c1;
-                  menor = ej7_c2;
-              } else {
-                  mayor = ej7_c2;
-                  menor = ej7_c1;
-              }
-              while (menor <= mayor) {
-                  let calculo = menor % 3;
-                  if (calculo === 0) {
-                      ej7_resultado = ej7_resultado + ' | ' + menor;
-                  }
-                  menor++;
-              }
-          }
-      </script>
-  
-  <h5>Ejercicio 8</h5>
+
+<h5>Ejercicio 8</h5>
+  <label for="ej8_c1">Número</label>
+  <input type="number" id="ej8_c1">
+  <br>
+       
+  <button onclick = "func_ej8()" >Resultado</button>
+       
+  <label for="ej8_resultado">Resultado</label>
+  <input type="text" id="ej8_resultado">
   
   
   
@@ -191,51 +154,19 @@
   <label for="ej9_resultado">Resultado</label>
   <input type="text" id="ej9_resultado">
   
-  <script>
-      function func_ej9() {
-          let ej9_c1=document.getElementById("ej9_c1").value;
-          let ej9_c2=parseFloat(document.getElementById("ej9_c2").value);
-          let ej9_c3=document.getElementById("ej9_c3").value;
-      
-          document.getElementById("ej9_resultado").value = "Mi nombre es " + ej9_c1 + ", tengo " + ej9_c2 + " años. Nací en la ciudad de " + ej9_c3 + "."; 
-  
-      }
-  </script>
-  
       <h5>Ejercicio 10</h5>
   <!--Ingresar dos valores enteros y enumerar los elementos que los separan.-->
-  <label for="ej10_c1">Ingresar Numero</label>    
+
+  <label for="ej10_c1">Primer Número</label>
   <input type="number" id="ej10_c1">
   <br>
   
-  <label for="ej10_c2">Ingresar Numero</label>    
+  <label for="ej10_c2">Segundo Número</label>
   <input type="num" id="ej10_c2">
   <br>
   
   <button onclick="func_ej10()">Comparar</button>
   <label for="ej10_resultado">Resultado</label>
   <input type="text" id="ej10_resultado">
-  
-  <script>
-      function func_ej10 () {
-  
-          let ej10_c1= parseFloat(document.getElementById("ej10_c1").value);
-          let ej10_c2= parseFloat(document.getElementById("ej10_c2").value);
-  
-      if (ej10_c1>ej10_c2){
-          for(i=ej10_c2 + 1; i < ej10_c1; i ++){
-              ej10_resultado= ej10_resultado + i + "-"
-          }
-      }else{
-          for(i=ej10_c1 + 1; i < ej10_c2; i++){
-              ej10_resultado= ej10_resultado + i + "-"
-          }
-      
-      }
-      document.getElementById("ej10_resultado").value = ej10_resultado;
-      }
-  </script>
-  
-
 </body>
 </html>
