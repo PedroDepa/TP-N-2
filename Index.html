@@ -1,339 +1,59 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style> body{margin:0} </style>
-    <script src="//cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
-    <title>Phaser 3 - Ejemplo de Escenas</title>
+    <title>Document</title>
+    <link rel="stylesheet" href="./estilos.css">
+    <script src="./assets/JS/phaser.js"></script>
+
 </head>
-<body>
-    <!-- Carga del archivo configuración de Phaser -->
-    <script type="module" src="../TPN2/src/JS/index.js"></script>
-</body>
-</html> 
-
-<!--<body>
-
-    <script type="text/javascript">
-    
-    var config = {
-        type: Phaser.AUTO,
-        width: 800,
-        height: 600,
-        physics: {
-            default: 'arcade',
-            arcade: {
-                gravity: { y: 300 },
-                debug: false
-            }
-        },
-        scene: {
-            preload: preload,
-            create: create,
-            update: update
-        }
-    };
-    
-    var player;
-    var stars;
-    var bombs;
-    var platforms;
-    var cursors;
-    var score;
-    var gameOve;
-    var scoreText;
-    var scoreTime;
-    var time;
-    var plataform;
-    var point;
-    
-    var game = new Phaser.Game(config);
-    
-    function preload ()
-    {
-        this.load.image('sky', 'assets/sky.png');
-        this.load.image('ground', 'assets/platform.png');
-        this.load.image('ground1', 'assets/platform 1.png');
-        this.load.image('ground2', 'assets/platform 2.png');
-        this.load.image('star', 'assets/star.png');
-        this.load.image('bomb', 'assets/bomb.png');
-        this.load.image('point','assets/point.png');
-        this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
-        this.load.image('gameover', 'assets/gameover.png');
-        this.load.image('plataform', 'assets/plataform3.png');
-    
-    }
-    
-    function create ()
-    {
-        gameOver = false
-        score=0
-        time=0
-        //  A simple background for our game
-        this.add.image(400, 300, 'sky');
-    
-        // Creo un Game over y lo hago invisible
-        this.gameoverImage = this.add.image(400, 90, 'gameover');
-        this.gameoverImage.visible = false;
-    
-        //Creo plataforma de movimiento
-    
-        this.plataform = this.physics.add.image(400, 430, 'plataform');
-        this.plataform.body.allowGravity=false;
-        this.plataform.setVelocity(10, 0);
-        this.plataform.setCollideWorldBounds(true);
-        this.plataform.setBounce(1);
-        
-    
-        
-    
-    
-    
-        //  The platforms group contains the ground and the 2 ledges we can jump on
-        platforms = this.physics.add.staticGroup();
-    
-        //  Here we create the ground.
-        //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
-        platforms.create(400, 568, 'ground').setScale(2).refreshBody();
-    
-        //  Now let's create some ledges
-       
-        platforms.create(50, 250, 'ground1');
-        platforms.create(750, 220, 'ground2');
-        
-        
-    
-        // The player and its settings
-        player = this.physics.add.sprite(100, 450, 'dude');
-    
-        //  Player physics properties. Give the little guy a slight bounce.
-        player.setBounce(0.3);
-        player.setCollideWorldBounds(true);
-    
-        //  Our player animations, turning, walking left and walking right.
-        this.anims.create({
-            key: 'left',
-            frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
-            frameRate: 10,
-            repeat: -1
-        });
-    
-        this.anims.create({
-            key: 'turn',
-            frames: [ { key: 'dude', frame: 4 } ],
-            frameRate: 20
-        });
-    
-        this.anims.create({
-            key: 'right',
-            frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
-            frameRate: 10,
-            repeat: -1
-        });
-    
-        //  Input Events
-        cursors = this.input.keyboard.createCursorKeys();
-    
-        point = this.physics.add.group({
-            key: 'point',
-            repeat: 4,
-            setXY: { x: 100, y: 0, stepX: 150 }
-        });
-    
-        point.children.iterate(function (child) {
-    
-            //  Give each star a slightly different bounce
-            child.setBounceY(Phaser.Math.FloatBetween(0.3, 0.3));
-    
-        });
-    
-        //  Some stars to collect, 12 in total, evenly spaced 70 pixels apart along the x axis
-        stars = this.physics.add.group({
-            key: 'star',
-            repeat: 5,
-            setXY: { x: 12, y: 0, stepX: 150 }
-        });
-    
-        stars.children.iterate(function (child) {
-    
-            //  Give each star a slightly different bounce
-            child.setBounceY(Phaser.Math.FloatBetween(0.3, 0.3));
-    
-        });
-    
-        bombs = this.physics.add.group();
-    
-        //  The score
-        scoreText = this.add.text(16, 16, 'Puntos: 0', { fontSize: '32px', fill: '#FFFFFF' });
-        scoreTime = this.add.text(600, 16, 'Tiempo: 0', { fontSize: '32px', fill: '#FFFFFF' });
-    
-        //  Collide the player and the stars with the platforms
-    
-        this.physics.add.collider(player, this.plataform);
-    
-        this.physics.add.collider(platforms, this.plataform);
-    
-        this.physics.add.collider(player, platforms);
-    
-        this.physics.add.collider(stars, platforms);
-        
-        this.physics.add.collider(bombs, platforms);
-    
-        this.physics.add.collider(bombs, this.plataform);
-    
-        this.physics.add.collider(point, platforms);
-       
-    
-    
-        //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
-        this.physics.add.overlap(player, stars, collectStar, null, this);
-    
-        this.physics.add.overlap(player, point, collectPoint, null, this);    
-    
-        this.physics.add.collider(player, bombs, hitBomb, null, this);
-    
-    }
-    
-    function update ()
-    {
-        if (gameOver)
-        {
-         return;
-        }
-    
-        if (cursors.left.isDown)
-        {
-            player.setVelocityX(-160);
-    
-            player.anims.play('left', true);
-        }
-        else if (cursors.right.isDown)
-        {
-            player.setVelocityX(160);
-    
-            player.anims.play('right', true);
-        }
-        else
-        {
-            player.setVelocityX(0);
-    
-            player.anims.play('turn');
-        }
-    
-        if (cursors.up.isDown && player.body.touching.down)
-        {
-            player.setVelocityY(-330);
-        }
-    }
-    
-    function collectStar (player, star)
-    {
-        star.disableBody(true, true);
-    
-        //  Add and update the score
-        score += 5;
-        scoreText.setText('Puntos: ' + score);
-    
-      
-        if (stars.countActive(true) === 0 && point.countActive(true) === 0)
-        {
-            
-            //  A new batch of stars to collect
-            stars.children.iterate(function (child) {
-    
-                child.enableBody(true, child.x, 0, true, true);
-    
-            });
-    
-            point.children.iterate(function (child) {
-    
-                child.enableBody(true, child.x, 0, true, true);
-    
-            });
-    
-            var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
-    
-            var bomb = bombs.create(x, 16, 'bomb');
-            bomb.setBounce(1);
-            bomb.setCollideWorldBounds(true);
-            bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
-            bomb.allowGravity = false;
-    
-           
-        }
-    }
-    
-    function collectPoint (player, point)
-    {
-        point.disableBody(true, true);
-    
-        //  Add and update the score
-        score += 10;
-        scoreText.setText('Puntos: ' + score);
-    
-    
-        if (stars.countActive(true) === 0 && point.countActive(true) === 0)
-        {
-            
-            //  A new batch of stars to collect
-            point.children.iterate(function (child) {
-    
-                child.enableBody(true, child.x, 0, true, true);
-    
-            });
-    
-    
-            var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
-    
-            var bomb = bombs.create(x, 16, 'bomb');
-            bomb.setBounce(1);
-            bomb.setCollideWorldBounds(true);
-            bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
-            bomb.allowGravity = false;
-    
-           
-        }
-    }
-     
-     
-      
-    function Time ()
-    {
-        time = 00
-        scoreTime.setText('Tiempo: ' + time);
-    
-        if (time.countActive === 00);
-        { time += 1;
-    
-        }
-    
-    
-    }
-    function hitBomb (player, bomb)
-    {
-        this.physics.pause();
-    
-        player.setTint(0xff0000);
-    
-        player.anims.play('turn');
-    
-        gameOver = true;
-    
-        this.scene.start();
-    
-    }
-    
-    </script>
-    
-    </body>-->
-
-
-     <!-- preload() {
-    this.load.tilemapTiledJSON("map", "public/assets/tilemaps/map.json");
-    this.load.image("tilesBelow", "public/assets/images/sky_atlas.png");
-    this.load.image("tilesPlatform", "public/assets/images/platform_atlas.png");
+<body>  
+ <h1>Pedro Depauli</h1>
+ <style>
+   h1 {
+     text-align: center;
+   }
+ </style>
+ <img src="../assets/Foto de perfil.jpg" alt="Chaparro" width="200px" height="200Spx">
+   <style>
+   img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 60%;
+    border-right: 20%;
   }
--->
+</style>
+<p class="Yo"><b> Un poco sobre mi </b></p>
+<ul>
+  <li> Estudiante cursando la carrera de Programacion de Videojuegos en la UNRAF </li> 
+  <li>Tengo 18 Años</li>
+  <li>Vivo en Rafaela </li>
+  <li>Soy de Santa Fe</li>
+  <li>Vivo solo</li>
+  <li>Actualmente no hago ningun deporte</li>
+  <li>Curso ingles en la UTN</li>
+</ul>
+<p class="Gustos"><b>Mis gustos</b></p>
+<ul>
+  <li>Mis videojuegos favoritos son: </li>
+  <ul>- <em>Elden Ring</em></ul>
+  <ul>- <em>League of Legends</em></ul>
+  <ul>- <em> Cuphead </em></ul>
+  <ul>- <em>Hollow Knight</em></ul>
+  <li>Me gusta el Tennis, Golf, Voley, Ping Pong y el Pool</li>
+  <li>Mi serie favorita es Two and a Half Man</li>
+</ul>
+  <p class="Yo"><b> Mis redes </b></p>
+  <ul>
+    <li>Mi Instagram: https://www.instagram.com/pedro_depa/?hl=es-la </li>
+    <li>Mi Discord: PedroDepa#5105</li>
+  </ul>
+</ul>
+<a href="../10 Actividades/tpjs.html">PRACTICA</a>
+<br>
+<a href="../part10.html">Juego</a>
+</body>
+</html>

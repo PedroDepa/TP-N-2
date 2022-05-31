@@ -30,4 +30,6 @@ var config = {
   // La primera escena es con la cual empieza el juego
 };
 
+
+console.log ()
 var game = new Phaser.Game(config);

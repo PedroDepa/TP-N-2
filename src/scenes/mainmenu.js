@@ -1,4 +1,4 @@
-import Button from "../JS/button.js";
+import Button from "../js/button.js";
 
 // Clase MainMenu, donde se crean los botones, el logo y el fondo del menú principal
 export class MainMenu extends Phaser.Scene {
