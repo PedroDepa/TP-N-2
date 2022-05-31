@@ -6,7 +6,7 @@ var bombs;
 var platforms;
 var cursors;
 var score;
-var gameOve;
+var gameOver;
 var scoreText;
 var scoreTime;
 var time;
@@ -31,6 +31,7 @@ export class Play extends Phaser.Scene {
         gameOver = false
         score=0
         time=0
+        
         //  A simple background for our game
         this.add.image(400, 300, 'sky');
     
@@ -45,9 +46,6 @@ export class Play extends Phaser.Scene {
         this.plataform.setVelocity(10, 0);
         this.plataform.setCollideWorldBounds(true);
         this.plataform.setBounce(1);
-        
-    
-        
     
     
     
@@ -71,27 +69,7 @@ export class Play extends Phaser.Scene {
         //  Player physics properties. Give the little guy a slight bounce.
         player.setBounce(0.3);
         player.setCollideWorldBounds(true);
-    
-        //  Our player animations, turning, walking left and walking right.
-        this.anims.create({
-            key: 'left',
-            frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
-            frameRate: 10,
-            repeat: -1
-        });
-    
-        this.anims.create({
-            key: 'turn',
-            frames: [ { key: 'dude', frame: 4 } ],
-            frameRate: 20
-        });
-    
-        this.anims.create({
-            key: 'right',
-            frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
-            frameRate: 10,
-            repeat: -1
-        });
+  
     
         //  Input Events
         cursors = this.input.keyboard.createCursorKeys();
@@ -131,9 +109,7 @@ export class Play extends Phaser.Scene {
 
     // Collide the player and the stars with the platforms
     // REPLACE Add collision with worldLayer
-    this.physics.add.collider(player, worldLayer);
-    this.physics.add.collider(stars, worldLayer);
-    this.physics.add.collider(bombs, worldLayer);
+
     this.physics.add.collider(player, this.plataform);
     this.physics.add.collider(platforms, this.plataform);
     this.physics.add.collider(player, platforms);
@@ -143,12 +119,12 @@ export class Play extends Phaser.Scene {
     this.physics.add.collider(point, platforms);
 
     //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
-    this.physics.add.overlap(player, stars, this.collectStar, null, this);
+    this.physics.add.overlap(player, stars, collectStar, null, this);
     this.physics.add.overlap(player, point, collectPoint, null, this); 
-    this.physics.add.collider(player, bombs, this.hitBomb, null, this);
+    this.physics.add.collider(player, bombs, hitBomb, null, this);
 
     gameOver = false;
-    score = 0;
+    
   }
 
   update() {
