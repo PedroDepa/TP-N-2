@@ -14,7 +14,7 @@
 </body>
 </html> 
 
-<!--<body>
+<body>
     <script type="text/javascript">
     
     var config = {
@@ -52,16 +52,16 @@
     
     function preload ()
     {
-        this.load.image('sky', 'assets/sky.png');
-        this.load.image('ground', 'assets/platform.png');
-        this.load.image('ground1', 'assets/platform 1.png');
-        this.load.image('ground2', 'assets/platform 2.png');
-        this.load.image('star', 'assets/star.png');
-        this.load.image('bomb', 'assets/bomb.png');
-        this.load.image('point','assets/point.png');
-        this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
-        this.load.image('gameover', 'assets/gameover.png');
-        this.load.image('plataform', 'assets/plataform3.png');
+        this.load.image('sky', 'public/assets/sky.png');
+        this.load.image('ground', 'public/assets/platform.png');
+        this.load.image('ground1', 'public/assets/platform 1.png');
+        this.load.image('ground2', 'public/assets/platform 2.png');
+        this.load.image('star', 'public/assets/star.png');
+        this.load.image('bomb', 'public/assets/bomb.png');
+        this.load.image('point','public/assets/point.png');
+        this.load.spritesheet('dude', 'public/assets/dude.png', { frameWidth: 32, frameHeight: 48 });
+        this.load.image('gameover', 'public/assets/gameover.png');
+        this.load.image('plataform', 'public/assets/plataform3.png');
     
     }
     
@@ -99,8 +99,8 @@
     
         //  Now let's create some ledges
        
-        platforms.create(50, 250, 'ground1');
-        platforms.create(750, 220, 'ground2');
+        platforms.create(-100, 250, 'ground');
+        platforms.create(950, 220, 'ground');
         
         
     
@@ -166,7 +166,7 @@
     
         //  The score
         scoreText = this.add.text(16, 16, 'Puntos: 0', { fontSize: '32px', fill: '#FFFFFF' });
-        scoreTime = this.add.text(600, 16, 'Tiempo: 0', { fontSize: '32px', fill: '#FFFFFF' });
+       
     
         //  Collide the player and the stars with the platforms
     
@@ -326,4 +326,4 @@
     
     </script>
     
-    </body>-->
+    </body>
