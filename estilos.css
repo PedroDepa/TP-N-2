@@ -11,10 +11,15 @@ h1{
     color: aliceblue;
     font-size: 250%;
 }
+a{
+  color: red;
+  
+}
 
 body{
   background-image: url("./public/assets/fondo.jpg")
   }
+  
   body{
-    background-size: 1600px 850px;
+    background-size: 2000px 980px;
   }
